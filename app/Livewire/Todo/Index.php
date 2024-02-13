@@ -13,7 +13,7 @@ class Index extends Component
     {
         Todo::find($id)->delete();
         $this->dispatch('deleteTodo');
-    }`
+    }
 
     #[On("editTodo")]
     #[On("closeModal")]
