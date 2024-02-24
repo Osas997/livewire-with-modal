@@ -13,6 +13,31 @@ class Index extends Component
 
     public $search = '';
 
+    public $selectAll = false;
+
+    public $selectedDeleteId = [];
+
+    public function updatedSelectAll()
+    {
+        if ($this->selectAll) {
+            $this->selectedDeleteId = Todo::pluck('id')->toArray();
+        } else {
+            $this->selectedDeleteId = [];
+        }
+    }
+
+    #[On("bulkDelete")]
+    public function bulkDelete()
+    {
+        if (count($this->selectedDeleteId) > 0) {
+            Todo::destroy($this->selectedDeleteId);
+            $this->dispatch('deleteTodo');
+        }
+
+        $this->reset('selectedDeleteId');
+        $this->resetPage();
+    }
+
     public function updatingSearch()
     {
         $this->resetPage();
