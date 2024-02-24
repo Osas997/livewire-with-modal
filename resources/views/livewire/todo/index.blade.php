@@ -1,4 +1,7 @@
 <div>
+    <div class="col-6 mb-2">
+        <input type="text" placeholder="Cari..." wire:model.live="search" class="form-control">
+    </div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -22,6 +25,7 @@
             @endforeach
         </tbody>
     </table>
+    <div>
+        {{ $todos->links() }}
+    </div>
 </div>
-
-{{-- wire:click='delete({{ $todo->id }})' --}}
